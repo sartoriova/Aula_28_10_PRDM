@@ -4,22 +4,22 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 suspend fun main() {
-    val coroutine = CoroutineScope(Dispatchers.Default).launch {
+    val coroutineJob = CoroutineScope(Dispatchers.Default).launch {
         println(getMessage())
     }
     //coroutine.join()
 
     println("ANTES DO CANCELAMENTO")
-    println("Corrotina ativa: ${coroutine.isActive}")
-    println("Corrotina completa: ${coroutine.isCompleted}")
-    println("Corrotina cancelada: ${coroutine.isCancelled}")
+    println("Corrotina ativa: ${coroutineJob.isActive}")
+    println("Corrotina completa: ${coroutineJob.isCompleted}")
+    println("Corrotina cancelada: ${coroutineJob.isCancelled}")
 
-    coroutine.cancel()
+    coroutineJob.cancel()
 
     println("DEPOIS DO CANCELAMENTO")
-    println("Corrotina ativa: ${coroutine.isActive}")
-    println("Corrotina completa: ${coroutine.isCompleted}")
-    println("Corrotina cancelada: ${coroutine.isCancelled}")
+    println("Corrotina ativa: ${coroutineJob.isActive}")
+    println("Corrotina completa: ${coroutineJob.isCompleted}")
+    println("Corrotina cancelada: ${coroutineJob.isCancelled}")
 
     println("Fim da main")
 }
