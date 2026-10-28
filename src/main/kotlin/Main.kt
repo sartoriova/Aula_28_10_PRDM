@@ -3,10 +3,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-fun main() {
+suspend fun main() {
     val coroutine = CoroutineScope(Dispatchers.Default).launch {
         println(getMessage())
     }
+    coroutine.join()
+    print("Fim da main")
 }
 
 suspend fun getMessage(): String {
