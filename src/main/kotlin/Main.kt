@@ -7,8 +7,21 @@ suspend fun main() {
     val coroutine = CoroutineScope(Dispatchers.Default).launch {
         println(getMessage())
     }
-    coroutine.join()
-    print("Fim da main")
+    //coroutine.join()
+
+    println("ANTES DO CANCELAMENTO")
+    println("Corrotina ativa: ${coroutine.isActive}")
+    println("Corrotina completa: ${coroutine.isCompleted}")
+    println("Corrotina cancelada: ${coroutine.isCancelled}")
+
+    coroutine.cancel()
+
+    println("DEPOIS DO CANCELAMENTO")
+    println("Corrotina ativa: ${coroutine.isActive}")
+    println("Corrotina completa: ${coroutine.isCompleted}")
+    println("Corrotina cancelada: ${coroutine.isCancelled}")
+
+    println("Fim da main")
 }
 
 suspend fun getMessage(): String {
