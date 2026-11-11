@@ -5,9 +5,15 @@ import kotlinx.coroutines.launch
 import kotlin.coroutines.ContinuationInterceptor
 
 suspend fun main() {
-    CoroutineScope(Dispatchers.IO + CoroutineName("CoroutineFamily")).launch {
+    val pai = CoroutineScope(Dispatchers.IO + CoroutineName("CoroutineFamily")).launch {
         println("Contexto do pai: $coroutineContext")
         println("Thread do pai: ${Thread.currentThread().name}")
         println("Dispatcher do pai: ${coroutineContext[ContinuationInterceptor]}")
+
+        val filha = launch {
+            println("Contexto da filha: $coroutineContext")
+            println("Thread da filha: ${Thread.currentThread().name}")
+            println("Dispatcher da filha: ${coroutineContext[ContinuationInterceptor]}")
+        }
     }.join()
 }
